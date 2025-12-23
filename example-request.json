@@ -1,0 +1,173 @@
+{
+  "input": {
+    "workflow": {
+      "6": {
+        "inputs": {
+          "text": "A drone quickly rises through a bank of morning fog, revealing a pristine alpine lake surrounded by snow-capped mountains. The camera glides forward over the glassy water, capturing perfect reflections of the peaks. As it continues, the perspective shifts to reveal a lone wooden cabin with a curl of smoke from its chimney, nestled among tall pines at the lake's edge. The final shot tracks upward rapidly, transitioning from intimate to epic as the full mountain range comes into view, bathed in the golden light of sunrise breaking through scattered clouds.",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "7": {
+        "inputs": {
+          "text": "low quality, worst quality, deformed, distorted, disfigured, motion smear, motion artifacts, fused fingers, bad anatomy, weird hand, ugly",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "8": {
+        "inputs": {
+          "samples": [
+            "72",
+            0
+          ],
+          "vae": [
+            "44",
+            2
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "38": {
+        "inputs": {
+          "filename": "t5xxl_fp8_e4m3fn_scaled.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "41": {
+        "inputs": {
+          "text": "ComfyUI",
+          "images": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "SaveAnimatedWEBP",
+        "_meta": {
+          "title": "SaveAnimatedWEBP"
+        }
+      },
+      "44": {
+        "inputs": {
+          "ckpt_name": "ltxv-2b-0.9.8-distilled-fp8.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "_meta": {
+          "title": "CheckpointLoaderSimple"
+        }
+      },
+      "69": {
+        "inputs": {
+          "value": 25,
+          "positive": [
+            "6",
+            0
+          ],
+          "negative": [
+            "7",
+            0
+          ]
+        },
+        "class_type": "LTXVConditioning",
+        "_meta": {
+          "title": "LTXVConditioning"
+        }
+      },
+      "70": {
+        "inputs": {
+          "value": 768
+        },
+        "class_type": "EmptyLTXVLatentVideo",
+        "_meta": {
+          "title": "EmptyLTXVLatentVideo"
+        }
+      },
+      "71": {
+        "inputs": {
+          "value": 30,
+          "latent": [
+            "70",
+            0
+          ]
+        },
+        "class_type": "LTXVScheduler",
+        "_meta": {
+          "title": "LTXVScheduler"
+        }
+      },
+      "72": {
+        "inputs": {
+          "value": true,
+          "model": [
+            "44",
+            0
+          ],
+          "positive": [
+            "69",
+            0
+          ],
+          "negative": [
+            "69",
+            1
+          ],
+          "sampler": [
+            "73",
+            0
+          ],
+          "sigmas": [
+            "71",
+            0
+          ],
+          "latent_image": [
+            "70",
+            0
+          ]
+        },
+        "class_type": "SamplerCustom",
+        "_meta": {
+          "title": "SamplerCustom"
+        }
+      },
+      "73": {
+        "inputs": {
+          "text": "res_multistep"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "77": {
+        "inputs": {
+          "text": "ComfyUI",
+          "images": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "SaveWEBM",
+        "_meta": {
+          "title": "SaveWEBM"
+        }
+      }
+    }
+  }
+}
